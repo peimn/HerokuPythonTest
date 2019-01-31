@@ -15,6 +15,8 @@ app.config.from_object(app_settings)
 # Initialize Bcrypt
 bcrypt = Bcrypt(app)
 
+
+# Edit here below
 @app.route("/"+sec)
 def hello():
     return "Hello World!"
