@@ -55,7 +55,7 @@ def webhook():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    bot.sendMessage(update.message.chat_id, text="Hello")
+    bot.sendMessage(update.message.chat_id, text="Index")
 
 @app.route('/set_webhook', methods=['GET', 'POST'])
 def set_webhook():
