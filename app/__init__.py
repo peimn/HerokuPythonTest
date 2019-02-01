@@ -1,10 +1,15 @@
 import os
 from flask import Flask
 from flask_bcrypt import Bcrypt
-import telegram
-from telegram.ext import Updater
+from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.ext import Dispatcher,CommandHandler, MessageHandler, Filters
+from queue import Queue
+TOKEN = '765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg'
+bot = Bot(TOKEN)
+update_queue = Queue()
 
-sec = 'asdaskjdhaufsf897987'
+dp = Dispatcher(bot, update_queue)
+
 # Initialize application
 app = Flask(__name__, static_folder=None)
 
@@ -18,25 +23,43 @@ app.config.from_object(app_settings)
 # Initialize Bcrypt
 bcrypt = Bcrypt(app)
 
-PORT = int(os.environ.get('PORT', '8443'))
-
-#bot = telegram.Bot('765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg')
-updater = Updater('765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg')
-# add handlers
-# updater.start_webhook(listen="0.0.0.0",
-#                       port=PORT,
-#                       url_path='765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg')
-updater.bot.set_webhook("https://python20.herokuapp.com/" + '765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg')
-updater.idle()
-
 # Edit here below
-@app.route("/"+sec)
-def hello():
-    return "Hello World!"
+def start(bot, update, args):
+    telegram_user = update.message.from_user
 
-@app.route('/' + sec, methods=['POST'])
+    bot.sendMessage(update.message.chat_id, text="Hello "+telegram_user)
+
+
+def help(bot, update):
+    bot.sendMessage(update.message.chat_id, text="Help!")
+
+def main():
+    dp.add_handler(CommandHandler('start', start, pass_args=True))
+    dp.add_handler(CommandHandler("help", help))
+    
+    thread = Thread(target=dp.start, name='dp')
+    thread.start()
+
+main()
+
+@app.route('/hook/'+TOKEN, methods=['GET', 'POST'])
 def webhook():
-    update = telegram.update.Update.de_json(request.get_json(force=True))
-    bot.sendMessage(chat_id=update.message.chat_id, text='Hello, there')
+    if request.method == "POST":
+        # retrieve the message in JSON and then transform it to Telegram object
+        update = Update.de_json(request.get_json(force=True))
 
-    return 'OK'
+        dp.process_update(update)
+        update_queue.put(update)
+        return "OK"
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    bot.sendMessage(update.message.chat_id, text="Hello")
+
+@app.route('/set_webhook', methods=['GET', 'POST'])
+def set_webhook():
+    s = bot.set_webhook("https://python20.herokuapp.com/hook/"+TOKEN)
+    if s:
+        return "webhook setup ok"
+    else:
+        return "webhook setup failed"
