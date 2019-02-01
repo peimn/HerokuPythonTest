@@ -32,5 +32,5 @@ def webhook():
     return 'OK'
 
 def setWebhook():
-    bot.setWebhook(webhook_url='https://%s:%s/%s' % ('python20.herokuapp.com', 80, sec),
+    bot.setWebhook(webhook_url='https://%s:%s/%s' % ('0.0.0.0', 5000, sec),
                    certificate=open(CERT, 'rb'))
