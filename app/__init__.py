@@ -28,14 +28,14 @@ bcrypt = Bcrypt(app)
 def start(bot, update, args):
     telegram_user = update.message.from_user
 
-    bot.sendMessage(update.message.chat_id, text="Hello "+telegram_user)
+    bot.sendMessage(update.message.chat_id, text="Hello")
 
 
 def help(bot, update):
     bot.sendMessage(update.message.chat_id, text="Help!")
 
 def main():
-    dp.add_handler(CommandHandler('start', start))
+    dp.add_handler(CommandHandler('start', start, pass_args=True))
     dp.add_handler(CommandHandler("help", help))
     
     thread = Thread(target=dp.start, name='dp')
