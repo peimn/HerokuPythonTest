@@ -47,7 +47,7 @@ main()
 def webhook():
     if request.method == "POST":
         # retrieve the message in JSON and then transform it to Telegram object
-        update = Update.de_json(request.get_json(force=True))
+        update = Update.de_json(request.get_json(force=True), bot)
 
         dp.process_update(update)
         update_queue.put(update)
