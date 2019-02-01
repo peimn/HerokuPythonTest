@@ -43,7 +43,7 @@ def main():
 
 main()
 
-@app.route('/hook/'+TOKEN, methods=['GET', 'POST'])
+@app.route('/'+TOKEN, methods=['GET', 'POST'])
 def webhook():
     if request.method == "POST":
         # retrieve the message in JSON and then transform it to Telegram object
@@ -59,7 +59,7 @@ def index():
 
 @app.route('/set_webhook', methods=['GET', 'POST'])
 def set_webhook():
-    s = bot.set_webhook("https://python20.herokuapp.com/hook/"+TOKEN)
+    s = bot.set_webhook("https://python20.herokuapp.com/"+TOKEN)
     if s:
         return "webhook setup ok"
     else:
