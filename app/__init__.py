@@ -23,9 +23,9 @@ PORT = int(os.environ.get('PORT', '8443'))
 #bot = telegram.Bot('765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg')
 updater = Updater('765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg')
 # add handlers
-updater.start_webhook(listen="0.0.0.0",
-                      port=PORT,
-                      url_path='765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg')
+# updater.start_webhook(listen="0.0.0.0",
+#                       port=PORT,
+#                       url_path='765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg')
 updater.bot.set_webhook("https://python20.herokuapp.com/" + '765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg')
 updater.idle()
 
