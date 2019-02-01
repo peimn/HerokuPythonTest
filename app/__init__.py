@@ -35,7 +35,7 @@ def help(bot, update):
     bot.sendMessage(update.message.chat_id, text="Help!")
 
 def main():
-    dp.add_handler(CommandHandler('start', start, pass_args=True))
+    dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler("help", help))
     
     thread = Thread(target=dp.start, name='dp')
