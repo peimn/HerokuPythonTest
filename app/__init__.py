@@ -17,7 +17,7 @@ app.config.from_object(app_settings)
 # Initialize Bcrypt
 bcrypt = Bcrypt(app)
 
-bot = telegram.Bot(app.config.DevelopmentConfig.TOKEN)
+bot = telegram.Bot('765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg')
 
 # Edit here below
 @app.route("/"+sec)
@@ -32,5 +32,5 @@ def webhook():
     return 'OK'
 
 def setWebhook():
-    bot.setWebhook(webhook_url='https://%s:%s/%s' % (app.config.DevelopmentConfig.HOST, app.config.DevelopmentConfig.PORT, sec),
+    bot.setWebhook(webhook_url='https://%s:%s/%s' % ('python20.herokuapp.com', 80, sec),
                    certificate=open(CERT, 'rb'))
