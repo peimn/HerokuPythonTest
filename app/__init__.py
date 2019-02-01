@@ -17,7 +17,7 @@ app.config.from_object(app_settings)
 # Initialize Bcrypt
 bcrypt = Bcrypt(app)
 
-bot = telegram.Bot(app.config.TOKEN)
+bot = telegram.Bot(app.config.DevelopmentConfig.TOKEN)
 
 # Edit here below
 @app.route("/"+sec)
