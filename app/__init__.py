@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, request, redirect
 from flask_bcrypt import Bcrypt
 from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import Dispatcher,CommandHandler, MessageHandler, Filters
