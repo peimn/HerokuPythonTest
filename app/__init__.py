@@ -28,7 +28,7 @@ bcrypt = Bcrypt(app)
 def start(bot, update, args):
     telegram_user = update.message.from_user
 
-    bot.sendMessage(update.message.chat_id, text="Hello")
+    bot.sendMessage(update.message.chat_id, text="Hello!")
 
 
 def help(bot, update):
