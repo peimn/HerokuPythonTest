@@ -24,6 +24,9 @@ class DevelopmentConfig(BaseConfig):
     AUTH_TOKEN_EXPIRY_DAYS = 1
     AUTH_TOKEN_EXPIRY_SECONDS = 20
     BUCKET_AND_ITEMS_PER_PAGE = 4
+    TOKEN    = '765185530:AAGaBUP8CiLfzPhpfni2NcUfpUnPodm7oAg'
+    HOST     = 'python20.herokuapp.com' # Same FQDN used when generating SSL Cert
+    PORT     = 80
 
 
 class ProductionConfig(BaseConfig):
